@@ -4,16 +4,17 @@
   "description": "Extracts notes from a powerpoint (.pptx) presentation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "type": "module",
   "dependencies": {
-    "unzip-stream": "^0.3.4",
-    "xmldom": "^0.6.0"
+    "@xmldom/xmldom": "^0.8.11",
+    "unzip-stream": "^0.3.4"
   },
   "devDependencies": {
     "@types/unzip-stream": "^0.3.4",
-    "@types/xmldom": "^0.1.34"
+    "@types/xmldom": "^0.1.34",
+    "jest": "^30.2.0"
   },
   "installConfig": {
     "hoistingLimits": "dependencies"
