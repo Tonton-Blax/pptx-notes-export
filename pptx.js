@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { Parse as unzipParse } from 'unzip-stream';
-import { DOMParser } from 'xmldom';
+import fs from "fs";
+import { Parse as unzipParse } from "unzip-stream";
+import { DOMParser } from "@xmldom/xmldom";
 
 /**
  * @param {string} filename
@@ -15,14 +15,14 @@ export function readPptxFile(filename, entryMatchFunc, docHandler) {
 
     fs.createReadStream(filename)
       .pipe(unzipParser)
-      .on('entry', (entry) => {
+      .on("entry", (entry) => {
         if (entryMatchFunc(entry)) {
-          let xml = '';
-          entry.setEncoding('utf8');
-          entry.on('data', (chunk) => {
+          let xml = "";
+          entry.setEncoding("utf8");
+          entry.on("data", (chunk) => {
             xml += chunk;
           });
-          entry.on('end', () => {
+          entry.on("end", () => {
             const data = docHandler(new DOMParser().parseFromString(xml));
             if (data) {
               result.push(data);
@@ -32,10 +32,10 @@ export function readPptxFile(filename, entryMatchFunc, docHandler) {
           entry.autodrain();
         }
       })
-      .on('close', () => {
+      .on("close", () => {
         resolve(result);
       })
-      .on('error', (err) => {
+      .on("error", (err) => {
         reject(err);
       });
   });
